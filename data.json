@@ -1,0 +1,22 @@
+[
+  { "team": "Arsenal", "pts": 84 },
+  { "team": "Aston Villa", "pts": 61 },
+  { "team": "Bournemouth", "pts": 39 },
+  { "team": "Brentford", "pts": 59 },
+  { "team": "Brighton", "pts": 62 },
+  { "team": "Chelsea", "pts": 44 },
+  { "team": "Crystal Palace", "pts": 45 },
+  { "team": "Everton", "pts": 36 },
+  { "team": "Fulham", "pts": 52 },
+  { "team": "Leeds United", "pts": 31 },
+  { "team": "Leicester City", "pts": 34 },
+  { "team": "Liverpool", "pts": 67 },
+  { "team": "Man City", "pts": 89 },
+  { "team": "Man United", "pts": 75 },
+  { "team": "Newcastle", "pts": 71 },
+  { "team": "Nottm Forest", "pts": 38 },
+  { "team": "Southampton", "pts": 25 },
+  { "team": "Tottenham", "pts": 60 },
+  { "team": "West Ham", "pts": 40 },
+  { "team": "Wolves", "pts": 41 }
+]
