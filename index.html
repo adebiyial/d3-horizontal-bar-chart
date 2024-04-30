@@ -50,11 +50,27 @@
     const marginBottom = 0;
     const marginLeft = 90;
 
+    function plotSvgCanvas() {
+      const svgCanvas = d3
+        .create("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, height])
+        .style("outline", "1px solid red");
+
+      // Always be rendering
+      chartContainer.append(svgCanvas.node());
+
+      return svgCanvas;
+    }
+
     // This is an IIFE (Immediately Invoked Function Expression)
     // See: https://developer.mozilla.org/en-US/docs/Glossary/IIFE
     (async () => {
       const rawData = await d3.json("./data.json");
       const sortedData = d3.sort(rawData, (d) => -d.pts);
+
+      const svgCanvas = plotSvgCanvas();
     })();
   </script>
 </html>
