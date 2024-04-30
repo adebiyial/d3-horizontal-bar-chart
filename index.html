@@ -64,6 +64,25 @@
       return svgCanvas;
     }
 
+    const horizontalAxis = {
+      getScale(data) {
+        const xDomain = [0, d3.max(d3.map(data, (d) => d.pts))];
+        const xRange = [marginLeft, width - marginRight];
+        const xScale = d3.scaleLinear(xDomain, xRange);
+        return { xDomain, xRange, xScale };
+      },
+      draw({ data, svgCanvas }) {
+        const { xScale } = this.getScale(data);
+        const xAxis = d3.axisTop(xScale);
+        svgCanvas
+          .append("g")
+          .classed("x-axis", true)
+          .call(xAxis)
+          .call((g) => g.select(".domain").remove())
+          .attr("transform", `translate(0,${marginTop})`);
+      },
+    };
+
     // This is an IIFE (Immediately Invoked Function Expression)
     // See: https://developer.mozilla.org/en-US/docs/Glossary/IIFE
     (async () => {
@@ -71,6 +90,7 @@
       const sortedData = d3.sort(rawData, (d) => -d.pts);
 
       const svgCanvas = plotSvgCanvas();
+      horizontalAxis.draw({ data: sortedData, svgCanvas });
     })();
   </script>
 </html>
