@@ -83,6 +83,30 @@
       },
     };
 
+    const verticalAxis = {
+      getScale(data) {
+        const yDomain = d3.map(data, (d) => d.team);
+        const yRange = [marginTop, height - marginBottom];
+        const yScale = d3.scaleBand(yDomain, yRange).padding(0.1);
+        return { yDomain, yRange, yScale };
+      },
+      draw({ data, svgCanvas }) {
+        const { yScale } = this.getScale(data);
+        const yAxis = d3
+          .axisLeft(yScale)
+          .tickPadding(10)
+          .tickSizeInner(0)
+          .tickSizeOuter(0);
+
+        svgCanvas
+          .append("g")
+          .classed("y-axis", true)
+          .call(yAxis)
+          .call((g) => g.select(".domain").remove())
+          .attr("transform", `translate(${marginLeft}, 0)`);
+      },
+    };
+
     // This is an IIFE (Immediately Invoked Function Expression)
     // See: https://developer.mozilla.org/en-US/docs/Glossary/IIFE
     (async () => {
@@ -91,6 +115,7 @@
 
       const svgCanvas = plotSvgCanvas();
       horizontalAxis.draw({ data: sortedData, svgCanvas });
+      verticalAxis.draw({ data: sortedData, svgCanvas });
     })();
   </script>
 </html>
