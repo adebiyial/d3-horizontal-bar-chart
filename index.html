@@ -39,6 +39,17 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 
   <script>
+    // Dimensions
+    const chartContainer = document.getElementById("chart-container");
+
+    const { width, height } = chartContainer.getBoundingClientRect();
+
+    // Play with these values at the end to see what happens 🤞
+    const marginTop = 25;
+    const marginRight = 10;
+    const marginBottom = 0;
+    const marginLeft = 90;
+
     // This is an IIFE (Immediately Invoked Function Expression)
     // See: https://developer.mozilla.org/en-US/docs/Glossary/IIFE
     (async () => {
