@@ -107,6 +107,39 @@
       },
     };
 
+    function drawContent({ data, svgCanvas }) {
+      const { xScale } = horizontalAxis.getScale(data);
+      const { yScale } = verticalAxis.getScale(data);
+
+      // Draw the bars
+      svgCanvas
+        .append("g")
+        .attr("fill", "#282828")
+        .classed("bars", true)
+        .selectAll()
+        .data(data)
+        .join("rect")
+        .attr("height", yScale.bandwidth())
+        .attr("width", (d) => xScale(d.pts) - xScale(0))
+        .attr("x", marginLeft)
+        .attr("y", (d) => yScale(d.team));
+
+      // Draw the labels
+      svgCanvas
+        .append("g")
+        .classed("labels", true)
+        .attr("fill", "#fff")
+        .attr("text-anchor", "end")
+        .selectAll()
+        .data(data)
+        .join("text")
+        .attr("x", (d) => xScale(d.pts))
+        .attr("y", (d) => yScale(d.team) + yScale.bandwidth() / 2)
+        .attr("dy", "0.35em")
+        .attr("dx", -4)
+        .text((d) => `${d.pts} pts`);
+    }
+
     // This is an IIFE (Immediately Invoked Function Expression)
     // See: https://developer.mozilla.org/en-US/docs/Glossary/IIFE
     (async () => {
@@ -116,6 +149,7 @@
       const svgCanvas = plotSvgCanvas();
       horizontalAxis.draw({ data: sortedData, svgCanvas });
       verticalAxis.draw({ data: sortedData, svgCanvas });
+      drawContent({ data: sortedData, svgCanvas });
     })();
   </script>
 </html>
